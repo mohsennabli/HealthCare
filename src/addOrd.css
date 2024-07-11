@@ -1,0 +1,54 @@
+.custom-card {
+  max-width: 800px; /* Reduced width */
+  margin: auto;
+  height: 100%;
+  margin-top: 20px;
+}
+
+.custom-card-body {
+  margin-top: 20px; /* Push the card body down */
+}
+
+.custom-form {
+  height: 100%; /* Increased height */
+}
+
+.custom-capsule-icon {
+  font-size: 3rem;
+  color: #007bff;
+  display: block;
+  margin: 20px auto; /* Center the icon */
+  
+}
+
+/* Center the inputs and arrange Age and Poids side by side */
+.form-group.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.form-group.row .col-sm-6,
+.form-group.row .col-sm-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-control.text-center {
+  text-align: center;
+}
+.bi-calendar-fill{
+  font-size: 1.5rem;
+}
+.bi-check-square{
+  font-size: 1.5rem;
+}
+
+.btn{
+  background-color: #73aaf3;
+  border: none;
+
+}
+
+

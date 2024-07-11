@@ -1,0 +1,28 @@
+/* src/App.css */
+.App {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left-section, .right-section {
+  width: 45%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.left-section {
+  background-color: #65d4e2;
+}
+
+.sign-in .buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-section .buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
