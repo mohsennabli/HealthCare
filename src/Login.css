@@ -61,7 +61,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 48%;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
   margin-top: 50px;
 }
 .sign-in-form{
@@ -71,7 +71,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 200px;
 }
 
@@ -135,4 +135,5 @@ body {
   border-bottom: 1px solid #ccc; /* Adjust line color as needed */
   margin: 0 10px; /* Adjust spacing as needed */
 }
+.carousel-inner{margin-top: 70px;}
 

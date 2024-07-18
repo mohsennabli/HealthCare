@@ -13,6 +13,7 @@ const AddOrd = ({ setActiveTab }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [medications, setMedications] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
   // State variables for the additional information
   const [nomMedecin, setNomMedecin] = useState('Dr. Flen Ben Foulen');
@@ -58,21 +59,71 @@ const AddOrd = ({ setActiveTab }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (nomPatient && age && poids  && medications.length > 0) {
+    if (nomPatient && age && poids && medications.length > 0) {
       setShowModal(true);
     }
   };
 
+  const handleChooseEmail = (e) => {
+    e.preventDefault();
+    setShowModal2(true);
+  };
+
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowModal2(false);
   };
 
   const isFormValid = () => {
     return nomPatient && age && poids && medications.length > 0;
   };
 
+  const handleViewProfile = () => {
+    setActiveTab('Profile');
+  };
+
+  const handleLogout = () => {
+    console.log('Logout clicked');
+    setActiveTab('Login');
+  };
+  const handleSearchOrdonnance = () => {
+    setActiveTab('Recherche');
+  };
+  
+
   return (
     <div className="container my-5">
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12 d-flex justify-content-end">
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="profileDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="bi bi-person-circle"></i>
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                  <li>
+                    <button className="dropdown-item" onClick={handleViewProfile}>
+                      View Profile
+                    </button>
+                  </li>
+                  <li>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <div className="col-12 login-header text-center">
           <i className="bi bi-prescription2 icon"></i>
@@ -88,10 +139,7 @@ const AddOrd = ({ setActiveTab }) => {
               </button>
             </div>
             <div className="col-6 text-right">
-              <div className="input-group">
-                <input type="search" className="form-control" placeholder="search" />
-                <span className="input-group-text"><i className="bi bi-search"></i></span>
-              </div>
+              <button className="btn btn-primary" onClick={handleSearchOrdonnance}>Rechercher Ordonnance</button>
             </div>
           </div>
         </div>
@@ -126,35 +174,22 @@ const AddOrd = ({ setActiveTab }) => {
             <div className="form-group row justify-content-center">
               <div className="col-sm-3">
                 <input
-                  type="text"
-                  className="form-control"
-                  placeholder='Age'
+                  type="number"
+                  className="form-control mb-2"
+                  placeholder="Age"
+                  required
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                 />
               </div>
               <div className="col-sm-3">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   placeholder='Poids'
                   value={poids}
                   onChange={(e) => setPoids(e.target.value)}
                 />
-              </div>
-            </div>
-            <div className="form-group row justify-content-center">
-              <div className="col-sm-6">
-                <div className="input-group">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                  <span className="input-group-text"><i className="bi bi-search"></i></span>
-                </div>
               </div>
             </div>
             <div className="container text-center">
@@ -271,8 +306,27 @@ const AddOrd = ({ setActiveTab }) => {
                     <p>Selectionner votre choix</p>
                   </div>
                   <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>PDF</button>
-                    <button type="button" className="btn btn-primary">EMAIL</button>
+                    <button type="button" className="btn btn-secondary">PDF</button>
+                    <button type="button" className="btn btn-primary" onClick={handleChooseEmail}>EMAIL</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {showModal2 && (
+            <div className="modal show d-block" tabIndex="-1">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Inserer Votre EMail</h5>
+                    <button type="button" className="btn-close" aria-label="Close" onClick={handleCloseModal}></button>
+                  </div>
+                  <div className="modal-body">
+                    <input type="email" className="form-control mb-2" placeholder="adresse email" required />
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" onClick={handleCloseModal}>Close</button>
+                    <button type="button" className="btn btn-secondary">Envoyer</button>
                   </div>
                 </div>
               </div>

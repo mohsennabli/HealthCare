@@ -1,0 +1,56 @@
+/* Recherche.css */
+.container {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    margin: 5px;
+  }
+  
+  .modal-content {
+    border-radius: 10px;
+  }
+  
+  .modal-header {
+    background-color: #007bff;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .modal-title {
+    margin: 0 auto;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .card.custom-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Increased width */
+    margin: 0 auto; /* Center the card */
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  
+  
+  .input-group .form-control {
+    border-left: 0;
+  }
+  
+  .table {
+    width: 100%; /* Make table width 100% */
+  }
+.bi-search{
+    font-size: 1rem;
+}

@@ -18,10 +18,8 @@
   color: #007bff;
   display: block;
   margin: 20px auto; /* Center the icon */
-  
 }
 
-/* Center the inputs and arrange Age and Poids side by side */
 .form-group.row {
   display: flex;
   justify-content: center;
@@ -38,17 +36,23 @@
 .form-control.text-center {
   text-align: center;
 }
-.bi-calendar-fill{
-  font-size: 1.5rem;
-}
-.bi-check-square{
+
+.bi-calendar-fill {
   font-size: 1.5rem;
 }
 
-.btn{
+.bi-check-square {
+  font-size: 1.5rem;
+}
+
+.btn {
   background-color: #73aaf3;
   border: none;
-
 }
 
-
+.bi-person-circle {
+  font-size: 2rem;
+}
+.btn-primary{
+  margin-left: 200px;
+}
