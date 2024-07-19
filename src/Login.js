@@ -2,33 +2,29 @@ import React, { useState, useRef,useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Login.css';
-import passwordReset from './passwordReset';
+
 import image1 from './images/image1.jpg';
 import image2 from './images/image2.jpg';
 import image3 from './images/image3.jpg';
 
 const Login = ({ setActiveTab }) => {
-  const [selectedRole, setSelectedRole] = useState('');
+  const [role, setSelectedRole] = useState({libelle:''});
   const signInFormRef = useRef(null);
   const signUpFormRef = useRef(null);
-  const [articles, setArticles] = useState([]);
-  const [nom,setNom]=useState(null);
-  const [prenom,setPrenom]=useState(null);
-  const [email,setEmail]=useState(null);
-  const [numtel,setNumtel]=useState(null);
-  const [mdp,setMdp]=useState(null);
-  const [adresse,setAdresse]=useState(null);
-  const [cin,setCin]=useState(null);
-
-
-
-
-
-  
+  const [nom,setNom]=useState('');
+  const [prenom,setPrenom]=useState('');
+  const [email,setEmail]=useState('');
+  const [telephone,setTelephone]=useState('');
+  const [password,setPassword]=useState('');
+  const [adresse,setAdresse]=useState('');
+  const [copieCIN,setCopieCIN]=useState('');
+  const [specialite,setSpecialite]=useState('');
+  const [utilisateur,setUtilisateur]=useState([]);
 
   const handleRoleChange = (event) => {
-    setSelectedRole(event.target.value);
+    setSelectedRole({libelle : event.target.value});
   };
+
 
   const handleSignInSubmit = (event) => {
     event.preventDefault();
@@ -51,6 +47,51 @@ const Login = ({ setActiveTab }) => {
       setActiveTab('addOrd');
     }
   };
+
+  const fetchDataSingIn = () => {
+    fetch('http://localhost:8090/connexion')
+        .then(res => res.json()
+      )
+        .catch(err => console.log(err));
+  };
+
+  const insertRowSignin = (e) => {
+    e.preventDefault(); 
+    fetch('http://localhost:8090/connexion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        authentificationDTO:{email:email,mdp:password},
+        body: JSON.stringify({email,password }),
+        
+    })
+    .then(() => fetchDataSingIn())
+    .catch(err => console.log(err));
+  };
+
+
+  const fetchDataRefresh = () => {
+    fetch('http://localhost:8090/refresh-token')
+        .then(res => res.json()
+      )
+        .catch(err => console.log(err));
+  };
+
+  const insertRefresh = (e) => {
+    e.preventDefault(); 
+    fetch('http://localhost:8090/connexion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        authentificationDTO:{email:email,mdp:password},
+        body: JSON.stringify({email,password }),
+        
+    })
+    .then(() => fetchDataRefresh())
+    .catch(err => console.log(err));
+  };
   const fetchData = () => {
     fetch('http://localhost:8090/inscription')
         .then(res => res.json())
@@ -64,15 +105,18 @@ const Login = ({ setActiveTab }) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nom,prenom,email,numtel,mdp,adresse,selectedRole }),
+        utilisateur:{nom:nom,prenom:prenom,email:email,numtel:parseInt(telephone),mdp:password,adresse:adresse,role:role},
+        body: JSON.stringify({nom,prenom,email,telephone,password,adresse, role }),
     })
     .then(() => fetchData())
     .catch(err => console.log(err));
-    alert("You are registered successfully");
+   
+   
   };
 
   useEffect(() => {
     fetchData();
+    fetchDataSingIn();
   }, []);
 
   return (
@@ -113,13 +157,13 @@ const Login = ({ setActiveTab }) => {
           </div>
           <form ref={signInFormRef} className="sign-in-form needs-validation" onSubmit={handleSignInSubmit} noValidate>
             <h3 className="inscription-heading">Se connecter</h3>
-            <input type="email" className="form-control mb-2" placeholder="adresse email" id="signInEmail" required />
+            <input type="email" className="form-control mb-2" placeholder="adresse email" id="signInEmail" value={email} onChange={(e)=>setEmail(e.target.value)} required />
             <div className='invalid-feedback'>Veuillez insérer votre email</div>
-            <input type="password" className="form-control mb-2" placeholder="Mot de passe" id="signInPassword" required />
+            <input type="password" className="form-control mb-2" placeholder="Mot de passe" id="signInPassword"onChange={(e)=>setPassword(e.target.value)} value={password} required />
             <div className='invalid-feedback'>Veuillez insérer votre mot de passe</div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button className="btn" type="reset">Réinitialiser</button>
-              <button className="btn" type="submit">Soumettre</button>
+              <button className="btn" type="reset"  >Réinitialiser</button>
+              <button className="btn" type="submit" onClick={insertRowSignin}>Soumettre</button>
             </div>
           </form>
         </div>
@@ -131,28 +175,28 @@ const Login = ({ setActiveTab }) => {
           <form ref={signUpFormRef} className="needs-validation" onSubmit={handleSignUpSubmit} noValidate>
             <div className="row">
               <div className="col-md-6 mb-2">
-                <input type="text" className="form-control" placeholder="Nom" value={nom} required />
+                <input type="text" className="form-control" placeholder="Nom" onChange={(e)=>setNom(e.target.value)} value={nom} required />
                 <div className='invalid-feedback'>Veuillez insérer votre nom</div>
               </div>
               <div className="col-md-6 mb-2">
-                <input type="text" className="form-control" placeholder="Prénom" value={prenom} required />
+                <input type="text" className="form-control" placeholder="Prénom" value={prenom} onChange={(e)=>setPrenom(e.target.value)} required />
                 <div className='invalid-feedback'>Veuillez insérer votre prénom</div>
               </div>
             </div>
-            <input type="email" className="form-control mb-2" placeholder="adresse email" value={email} required />
+            <input type="email" className="form-control mb-2" placeholder="adresse email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
             <div className='invalid-feedback'>Veuillez insérer votre adresse email</div>
             <div className="row">
-            <input type="text" className="form-control" placeholder="Num Telephone" value={numtel} required pattern="\d{8}" />
+            <input type="text" className="form-control" placeholder="Num Telephone" value={telephone} onChange={(e)=>setTelephone(e.target.value)} required pattern="\d{8}" />
             <div className='invalid-feedback'>Veuillez insérer un numéro de téléphone valide (8 chiffres)</div>
             <div className="col-md-6 mb-2">
-                <input type="text" className="form-control" placeholder="Num CIN" value={cin} required pattern="\d{8}" />
+                <input type="text" className="form-control" placeholder="Num CIN" value={copieCIN} onChange={(e)=>setCopieCIN(e.target.value)} required pattern="\d{8}" />
                 <div className='invalid-feedback'>Veuillez insérer un numéro de CIN valide (8 chiffres)</div>
               </div>
             </div>
-            <input type="password" className="form-control mb-2" placeholder="Mot de passe" value={mdp} required />
+            <input type="password" className="form-control mb-2" placeholder="Mot de passe" onChange={(e)=>setPassword(e.target.value)} value={password} required />
             <div className='invalid-feedback'>Veuillez insérer votre mot de passe</div>
             <p className="mb-2">Use at least one letter, one numeral, and seven characters.</p>
-            <input type="text" className="form-control mb-2" placeholder="Adresse cabinet ou pharmacie" value={adresse} required />
+            <input type="text" className="form-control mb-2" placeholder="Adresse cabinet ou pharmacie" value={adresse} onChange={(e)=>setAdresse(e.target.value)} required />
             <div className='invalid-feedback'>Veuillez insérer votre adresse de cabinet ou pharmacie</div>
             <div className="row">
               <div className="col-md-6 mb-2">
@@ -161,7 +205,7 @@ const Login = ({ setActiveTab }) => {
                     className="form-check-input"
                     type="radio"
                     name="role"
-                    value="Médecin"
+                    value="MEDECIN"
                     onChange={handleRoleChange}
                     id="medecin"
                     required />
@@ -177,7 +221,7 @@ const Login = ({ setActiveTab }) => {
                     className="form-check-input"
                     type="radio"
                     name="role"
-                    value="Pharmacien"
+                    value="PHARMACIEN"
                     onChange={handleRoleChange}
                     id="pharmacien"
                     required />
@@ -188,12 +232,13 @@ const Login = ({ setActiveTab }) => {
                 </div>
               </div>
             </div>
-            {selectedRole === 'Médecin' && (
+            {role.libelle === 'MEDECIN' && (
               <input
                 type="text"
                 className="form-control mb-2"
                 placeholder="Si vous êtes un médecin, entrez votre spécialité"
                 required
+                
               />
             )}
             <div className="d-grid gap-2 col-6 mx-auto">
