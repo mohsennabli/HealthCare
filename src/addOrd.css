@@ -1,12 +1,13 @@
-.custom-card {
+.card.custom-card {
   max-width: 800px; /* Reduced width */
   margin: auto;
   height: 100%;
-  margin-top: 20px;
+  margin-top: 50px;
 }
+.card-header{margin-top: 30px;}
 
 .custom-card-body {
-  margin-top: 20px; /* Push the card body down */
+  margin-top: 30px; /* Push the card body down */
 }
 
 .custom-form {

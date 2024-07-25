@@ -1,56 +1,88 @@
-/* Recherche.css */
 .container {
-    margin-top: 20px;
-  }
-  
-  .btn {
-    margin: 5px;
-  }
-  
-  .modal-content {
-    border-radius: 10px;
-  }
-  
-  .modal-header {
-    background-color: #007bff;
-    color: white;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  .modal-title {
-    margin: 0 auto;
-  }
-  
-  .modal-body {
-    padding: 20px;
-  }
-  
-  .form-control {
-    margin-bottom: 10px;
-  }
-  
-  .card.custom-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Increased width */
-    margin: 0 auto; /* Center the card */
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
-  
-  
-  .input-group .form-control {
-    border-left: 0;
-  }
-  
-  .table {
-    width: 100%; /* Make table width 100% */
-  }
-.bi-search{
-    font-size: 1rem;
+  margin-top: 20px;
+}
+
+.btn {
+  margin: 5px;
+  width: 100%; /* Stretch buttons to full width */
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #007bff;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-title {
+  margin: 0 auto;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+
+
+
+.input-group .form-control {
+  border-left: 0;
+}
+
+
+
+.table th,
+.table td {
+  padding: 12px; /* Add padding to table cells for better spacing */
+  text-align: center; /* Center align text in table cells */
+}
+
+.table th {
+  background-color: #f8f9fa; /* Light background for table headers */
+  color: #333; /* Dark text color for table headers */
+  font-weight: bold; /* Bold text for table headers */
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Light background for odd rows */
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef; /* Slightly darker background on hover */
+}
+
+.bi-search {
+  font-size: 1rem;
+}
+
+.input-group-text {
+  background-color: #007bff; /* Blue background for search icon */
+  color: white; /* White color for search icon */
+  border: 0; /* Remove border for search icon */
+}
+
+.input-group-text .bi-search {
+  font-size: 1.25rem; /* Increase size of search icon */
+}
+
+.input-group {
+  margin-bottom: 20px; /* Add margin bottom to the input group */
+}
+
+.mb-3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mb-3 .btn {
+  flex-grow: 1; /* Stretch the buttons */
+  margin: 0 5px; /* Add margin between buttons */
 }

@@ -12,9 +12,9 @@ const Recherche = ({ setActiveTab }) => {
 
   useEffect(() => {
     const initialOrdonnances = [
-      { id: 1, nomPatient: 'John Doe', poids: 75, startDate: '2024-07-01', endDate: '2024-07-10', nomMedicament: 'Paracetamol' },
-      { id: 2, nomPatient: 'Jane Smith', poids: 65, startDate: '2024-07-05', endDate: '2024-07-15', nomMedicament: 'Ibuprofen' },
-      { id: 3, nomPatient: 'Alice Johnson', poids: 55, startDate: '2024-07-03', endDate: '2024-07-12', nomMedicament: 'Aspirin' },
+      { id: 1, nomPatient: 'John Doe', poids: 75, startDate: '2024-07-01', endDate: '2024-07-10', nomMedicament: 'Paracetamol', typeMedicament: 'Analgesic', dosageMedicament: '500mg' },
+      { id: 2, nomPatient: 'Jane Smith', poids: 65, startDate: '2024-07-05', endDate: '2024-07-15', nomMedicament: 'Ibuprofen', typeMedicament: 'Anti-inflammatory', dosageMedicament: '200mg' },
+      { id: 3, nomPatient: 'Alice Johnson', poids: 55, startDate: '2024-07-03', endDate: '2024-07-12', nomMedicament: 'Aspirin', typeMedicament: 'Anti-inflammatory', dosageMedicament: '100mg' },
     ];
     setOrdonnances(initialOrdonnances);
     setFilteredOrdonnances(initialOrdonnances);
@@ -73,11 +73,10 @@ const Recherche = ({ setActiveTab }) => {
 
   return (
     <div className="container my-5">
-      <button className="btn btn-secondary mb-3" onClick={handleRetour}>
+      <div className='row'><div className='col-3 my-1 justify-content-start'><button className="btn btn-secondary d-inline-flex p-2 justify-content-center" onClick={handleRetour}>
         <i className="bi bi-arrow-left"></i> Retour
-      </button>
-      <div className="mb-3 input-group">
-        <span className="input-group-text">
+      </button></div>
+      <div className='col-9'><span className="input-group-text">
         </span>
         <input 
           type="text" 
@@ -85,19 +84,23 @@ const Recherche = ({ setActiveTab }) => {
           placeholder="Rechercher..." 
           value={searchTerm} 
           onChange={handleSearchChange} 
-        />
+        /></div>
       </div>
+      
       <div className="mb-3">
-        <button className="btn btn-primary me-2" onClick={handleFilterByDate}>Trier par Date</button>
-        <button className="btn btn-primary" onClick={handleFilterByName}>Trier par Nom</button>
+        <button className="btn btn-info me-2" onClick={handleFilterByDate}>Trier par Date</button>
+        <button className="btn btn-info" onClick={handleFilterByName}>Trier par Nom</button>
       </div>
-      <div className="card custom-card">
-        <div className="card-body">
+      <div className="card custom-card1">
+        <div className="card-body ">
           <table className="table table-bordered">
             <thead>
               <tr>
                 <th>Nom Patient</th>
                 <th>Poids</th>
+                <th>Nom Medicament</th>
+                <th>Type Medicament</th>
+                <th>Dosage Medicament</th>
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Actions</th>
@@ -108,6 +111,9 @@ const Recherche = ({ setActiveTab }) => {
                 <tr key={index}>
                   <td>{ordonnance.nomPatient}</td>
                   <td>{ordonnance.poids}</td>
+                  <td>{ordonnance.nomMedicament}</td>
+                  <td>{ordonnance.typeMedicament}</td>
+                  <td>{ordonnance.dosageMedicament}</td>
                   <td>{new Date(ordonnance.startDate).toLocaleDateString()}</td>
                   <td>{new Date(ordonnance.endDate).toLocaleDateString()}</td>
                   <td>
@@ -165,6 +171,24 @@ const Recherche = ({ setActiveTab }) => {
                       className="form-control" 
                       value={selectedOrdonnance.nomMedicament} 
                       onChange={(e) => setSelectedOrdonnance({ ...selectedOrdonnance, nomMedicament: e.target.value })}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Type Medicament</label>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      value={selectedOrdonnance.typeMedicament} 
+                      onChange={(e) => setSelectedOrdonnance({ ...selectedOrdonnance, typeMedicament: e.target.value })}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Dosage Medicament</label>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      value={selectedOrdonnance.dosageMedicament} 
+                      onChange={(e) => setSelectedOrdonnance({ ...selectedOrdonnance, dosageMedicament: e.target.value })}
                     />
                   </div>
                   <div className="mb-3">

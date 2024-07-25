@@ -1,0 +1,18 @@
+.choix-pharma-container {
+    margin-top: 50px;
+  }
+  
+  .btn-option {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .bi-qr-code-scan, .bi-pencil-square {
+    font-size: 1.5rem;
+  }
+  
